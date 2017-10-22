@@ -9,7 +9,7 @@ class ofApp : public ofBaseApp{
 		void update();
 		void draw();
 		void recursiveRectangleDrawing(ofRectangle rect, BOOLEAN isInverted, int numberOfIterations);
-		void invertBackgroundColor(BOOLEAN isInverted);
+		void invertBackgroundColor(BOOLEAN isInverted, BOOLEAN isRandom);
 		void logRectangle(ofRectangle rect);
 
 		void keyPressed(int key);

@@ -2,11 +2,11 @@
 
 ofRectangle originalRectangle;
 int originalCenterX, originalCenterY, rectWidth, rectHeight;
+const BOOLEAN COLOR_MODE = false;
 
 //--------------------------------------------------------------
-void ofApp::setup(){
+void ofApp::setup() {
 	ofBackground(0, 0, 0);
-	//ofSetBackgroundAuto(false);
 
 	//Setting the position and size of the original rectangle
 	rectWidth = ofGetWidth() - 50;
@@ -23,12 +23,12 @@ void ofApp::setup(){
 }
 
 //--------------------------------------------------------------
-void ofApp::update(){
+void ofApp::update() {
 	ofSetWindowTitle("Recursive Mind");
 }
 
 //--------------------------------------------------------------
-void ofApp::draw(){
+void ofApp::draw() {
 	ofClear(255, 255, 255);
 	recursiveRectangleDrawing(originalRectangle, true, 15);
 }
@@ -45,22 +45,29 @@ void ofApp::logRectangle(ofRectangle rect) {
 
 //--------------------------------------------------------------
 //Inverts color of the next rectangle. At the moment only works with black and white 
-void ofApp::invertBackgroundColor(BOOLEAN isInverted) {
+void ofApp::invertBackgroundColor(BOOLEAN isInverted, BOOLEAN isRandom) {
+
 	if (isInverted) {
-		ofSetColor(0, 0, 0);
+		if (isRandom) {
+			ofSetColor(ofColor(ofRandom(0, 255), ofRandom(0, 255), ofRandom(0, 255)));
+		}
+		else {
+			ofSetColor(0, 0, 0);
+		}
 		ofFill();
 	}
 	else {
 		ofSetColor(255, 255, 255);
 		ofFill();
 	}
+
 }
 
 //--------------------------------------------------------------
 //Draws rectangles recursively until a stopping criteria is meet
 void ofApp::recursiveRectangleDrawing(ofRectangle rect, BOOLEAN isInverted, int numberOfIterations) {
 	if (numberOfIterations > 0) {
-		invertBackgroundColor(isInverted);
+		invertBackgroundColor(isInverted, COLOR_MODE);
 		ofDrawRectangle(rect);
 
 		int centerX, centerY, rectWidth, rectHeight;
@@ -70,8 +77,12 @@ void ofApp::recursiveRectangleDrawing(ofRectangle rect, BOOLEAN isInverted, int 
 		centerY = (ofGetHeight() / 2) - (rectHeight / 2);
 
 		ofRectangle newRectangle;
-		newRectangle.x = centerX + (originalCenterX - rect.x);
-		newRectangle.y = centerY + (originalCenterY - rect.y);
+
+		//At the moment the new rectangle is centered and doesn't update with the position of the original rectangle
+		//newRectangle.x = centerX + (originalCenterX - rect.x);
+		//newRectangle.y = centerY + (originalCenterY - rect.y);
+		newRectangle.x = centerX;
+		newRectangle.y = centerY;
 		newRectangle.width = rectWidth;
 		newRectangle.height = rectHeight;
 
@@ -81,21 +92,21 @@ void ofApp::recursiveRectangleDrawing(ofRectangle rect, BOOLEAN isInverted, int 
 }
 
 //--------------------------------------------------------------
-void ofApp::keyPressed(int key){
+void ofApp::keyPressed(int key) {
 	switch (key) {
-	case OF_KEY_UP:		
-		originalRectangle.y-=5;
+	case OF_KEY_UP:
+		originalRectangle.y -= 5;
 		break;
 	case OF_KEY_DOWN:
-		originalRectangle.y+=5;
+		originalRectangle.y += 5;
 		break;
 	case OF_KEY_LEFT:
-		originalRectangle.x-=5;
-		
+		originalRectangle.x -= 5;
+
 		break;
 	case OF_KEY_RIGHT:
-		originalRectangle.x+=5;
-		
+		originalRectangle.x += 5;
+
 		break;
 	default:
 		break;
@@ -103,51 +114,51 @@ void ofApp::keyPressed(int key){
 }
 
 //--------------------------------------------------------------
-void ofApp::keyReleased(int key){
+void ofApp::keyReleased(int key) {
 
 }
 
 //--------------------------------------------------------------
-void ofApp::mouseMoved(int x, int y ){
+void ofApp::mouseMoved(int x, int y) {
 
 }
 
 //--------------------------------------------------------------
-void ofApp::mouseDragged(int x, int y, int button){
+void ofApp::mouseDragged(int x, int y, int button) {
 
 }
 
 //--------------------------------------------------------------
-void ofApp::mousePressed(int x, int y, int button){
+void ofApp::mousePressed(int x, int y, int button) {
 
 }
 
 //--------------------------------------------------------------
-void ofApp::mouseReleased(int x, int y, int button){
+void ofApp::mouseReleased(int x, int y, int button) {
 
 }
 
 //--------------------------------------------------------------
-void ofApp::mouseEntered(int x, int y){
+void ofApp::mouseEntered(int x, int y) {
 
 }
 
 //--------------------------------------------------------------
-void ofApp::mouseExited(int x, int y){
+void ofApp::mouseExited(int x, int y) {
 
 }
 
 //--------------------------------------------------------------
-void ofApp::windowResized(int w, int h){
+void ofApp::windowResized(int w, int h) {
 
 }
 
 //--------------------------------------------------------------
-void ofApp::gotMessage(ofMessage msg){
+void ofApp::gotMessage(ofMessage msg) {
 
 }
 
 //--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo){ 
+void ofApp::dragEvent(ofDragInfo dragInfo) {
 
 }
